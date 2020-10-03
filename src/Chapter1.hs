@@ -540,11 +540,11 @@ Casual reminder about adding top-level type signatures for all functions :)
 -}
 mid :: Int -> Int -> Int -> Int
 mid x y z
-    | ((x > y) && (x < z) || (x > z) && (x < y))  = x
-    | ((y > x) && (y < z) || (y > z) && (y < x))  = y
-    | ((x == y) || (x == z))                      = x 
-    | ((y == z))                                  = y
-    | otherwise                                   = z
+    | (x > y && x < z) || (x > z && x < y)  = x
+    | (y > x && y < z) || (y > z && y < x)  = y
+    | x == y || x == z                      = x 
+    | y == z                                = y
+    | otherwise                             = z
 
 {- |
 =⚔️= Task 8
@@ -628,8 +628,8 @@ specifying complex expressions.
 sumLast2 :: Int -> Int
 sumLast2 n = 
     let absN            = abs n
-        lastDgt         = mod absN 10
-        secondToLastDgt = mod (div absN 10) 10
+        lastDgt         = lastDigit absN
+        secondToLastDgt = lastDigit (div absN 10)
         in (lastDgt + secondToLastDgt)
 
 {- |
